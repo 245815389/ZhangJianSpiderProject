@@ -49,7 +49,6 @@ bar.render("租房情况数据可视化.html")
 bar = Bar()
 bar.add_xaxis(["北京", "上海", "广州", "青岛", "杭州","深圳","烟台"])
 bar.add_yaxis("岗位",[res_bj, res_sh, res_gz, res_qd, res_hz, res_sz, res_yt])
-# bar.add_yaxis("zufang",num_list)
 
 bar.set_global_opts(title_opts=opts.TitleOpts(title="IT岗位情况"),
         toolbox_opts=opts.ToolboxOpts(),
