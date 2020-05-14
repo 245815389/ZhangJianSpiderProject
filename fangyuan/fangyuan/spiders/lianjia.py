@@ -6,32 +6,18 @@ from .. items import FangyuanItem
 class LianjiaSpider(scrapy.Spider):
     name = 'lianjia'
     allowed_domains = ['lianjia.com']
-    start_urls = ['http://yt.lianjia.com/']
+    start_urls = ['http://bj.lianjia.com/zufang//']
 
     def parse(self, response):
-        li_list = response.xpath('//div[starts-with(@class,"header-wrap")]/div[@class="house-num"]/ul/li')
+        data1 = response.xpath('//div[starts-with(@class,"content__article")]/p[@class="content__title"]/span/text()').extract_first()
+        city_data = response.xpath('//div[starts-with(@class,"content__article")]/p[@class="content__title"]/a/text()').extract_first()
         item = FangyuanItem()
-        try:
-            data1 = li_list[0].xpath('./text()').extract_first()
-            data2 = li_list[1].xpath('./text()').extract_first()
-            data3 = li_list[2].xpath('./text()').extract_first()
-            item["data1"] = data1
-            item["data2"] = data2
-            item["data3"] = data3
-            yield item
-            print(data1,data2,data3)
-        except:
-            item["data1"] = data1
-            item["data2"] = data2
-            yield item
-            print(data1,data2)
+        item["data1"] = data1
+        item["city"] = city_data
+        yield item
 
-        # for li in li_list:
-        #     item = FangyuanItem()
-        #     data = li.xpath('./text()').extract_first()
-        #     item["data"] = data
-        #     yield item
-        base_url = "http://%s.lianjia.com/"
-        for city in ["bj", "sh", "gz"]:
+
+        base_url = "http://%s.lianjia.com/zufang//"
+        for city in ["sz", "sh", "gz", "qd" ,"hz", "yt"]:
             full_url = base_url % city
             yield scrapy.Request(url=full_url, callback=self.parse)

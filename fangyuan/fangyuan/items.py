@@ -9,7 +9,8 @@ import scrapy
 
 class FangyuanItem(scrapy.Item):
     # define the fields for your item here like:
+    city = scrapy.Field()
     data1 = scrapy.Field()
-    data2 = scrapy.Field()
-    data3 = scrapy.Field()
+
+
 
