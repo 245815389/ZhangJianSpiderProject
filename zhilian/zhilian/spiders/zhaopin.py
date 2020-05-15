@@ -20,9 +20,8 @@ class ZhaopinSpider(scrapy.Spider):
             item["company"] = company
             yield item
 
-            base_url = "https://xiaoyuan.zhaopin.com/search/jt=9000300000000&pg=%s"
-
-            for i in range(1, 2):
-                full_url = base_url % i
-                yield scrapy.Request(url=full_url, callback=self.parse)
+        base_url = "https://xiaoyuan.zhaopin.com/search/jt=9000300000000&pg=%s"
+        for i in range(1, 35):
+            full_url = base_url % i
+            yield scrapy.Request(url=full_url, callback=self.parse)
 
