@@ -25,6 +25,7 @@ class MonPipeline(object):
         self.conn= pymongo.MongoClient("localhost", 27017)
         self.db = self.conn.zhaopindb
         self.tables = self.db.zhaopintable
+        self.tables.remove({})
 
     def process_item(self, item, spider):
         self.tables.insert(dict(item))
