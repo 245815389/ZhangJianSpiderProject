@@ -33,3 +33,29 @@ class MonPipeline(object):
 
     def close_spider(self,spider):
         self.conn.close()
+
+ #    --------------------------------------------------------info--------------------------------------------------------------------
+class FangyuaninfoPipeline(object):
+    def open_spider(self, spider):
+        self.f = open("fangyuaninfo.json", "a", encoding="utf-8")
+
+    def process_item(self, info_item, spider):
+        self.f.write(json.dumps(dict(info_item), indent=4, ensure_ascii=False) + ',\n')
+        return info_item
+
+    def close_spider(self, spider):
+        self.f.close()
+
+class MoninfoPipeline(object):
+    def open_spider(self,spider):
+        self.conn= pymongo.MongoClient("localhost", 27017)
+        self.db = self.conn.fangyuaninfodb
+        self.tables = self.db.fangyuaninfotable
+        self.tables.remove({})
+
+    def process_item(self, info_item, spider):
+        self.tables.insert(dict(info_item))
+        return info_item
+
+    def close_spider(self,spider):
+        self.conn.close()

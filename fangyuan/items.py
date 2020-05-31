@@ -14,3 +14,8 @@ class FangyuanItem(scrapy.Item):
 
 
 
+class info_FangyuanItem(scrapy.Item):
+    information1 = scrapy.Field()
+    information2 = scrapy.Field()
+    information3 = scrapy.Field()
+    title = scrapy.Field()

@@ -67,7 +67,7 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'fangyuan.pipelines.FangyuanPipeline': 300,
-   'fangyuan.pipelines.MonPipeline': 300,
+   # 'fangyuan.pipelines.MonPipeline': 300,
 
 }
 
